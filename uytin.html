@@ -1,109 +1,71 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <title>Check uy tín</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quỹ Bảo Hiểm GDV Hải Đăng</title>
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #081c3a, #0d2b57);
-            color: #cbd5e1;
-            text-align: center;
-            overflow-x: hidden;
-        }
+<style>
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:linear-gradient(180deg,#0f2027,#203a43,#2c5364);
+    color:white;
+    text-align:center;
+}
 
-        .section-top {
-            padding: 100px 20px;
-            position: relative;
-            z-index: 2;
-        }
+.container{
+    padding:100px 20px;
+}
 
-        h1 {
-            color: #22d3ee;
-            font-size: 42px;
-            margin-bottom: 50px;
-        }
+h1{
+    font-size:40px;
+    color:#22d3ee;
+}
 
-        p {
-            font-size: 26px;
-            line-height: 1.8;
-            max-width: 900px;
-            margin: auto;
-        }
+p{
+    font-size:20px;
+    margin:20px 0;
+}
 
-        .back-btn {
-            display: inline-block;
-            margin-top: 70px;
-            padding: 14px 30px;
-            background-color: #22d3ee;
-            color: #081c3a;
-            text-decoration: none;
-            border-radius: 10px;
-            font-weight: bold;
-            font-size: 18px;
-        }
+button{
+    padding:12px 20px;
+    border:none;
+    border-radius:10px;
+    background:#22d3ee;
+    color:#000;
+    font-weight:bold;
+    cursor:pointer;
+}
 
-        .section-bottom {
-            height: 5000px;
-        }
-
-        /* Tuyết đẹp */
-        .snowflake {
-            position: fixed;
-            top: -20px;
-            width: 20px;
-            height: 20px;
-            pointer-events: none;
-            z-index: 1;
-            animation: fall linear forwards;
-        }
-
-        @keyframes fall {
-            to {
-                transform: translateY(110vh);
-            }
-        }
-    </style>
+.back-btn{
+    margin-top:30px;
+}
+</style>
 </head>
 
 <body>
 
-    <div class="section-top">
-        <h1>Quỹ Bảo Hiểm</h1>
+<div class="container">
+    <h1>Quỹ Bảo Hiểm</h1>
 
-        <p>
-            Không BH cho các DV “Vi Phạm Pháp Luật”.<br><br>
-            Lưu ý “Nội Dung Chuyển Khoản” để tránh bị rửa tiền
-        </p>
+    <p>Không BH cho các DV “Vi Phạm Pháp Luật”.</p>
+    <p>Lưu ý “Nội Dung Chuyển Khoản” để tránh bị rửa tiền</p>
 
-        <a href="index.html" class="back-btn">← Quay lại trang chủ</a>
-    </div>
+    <button class="back-btn" onclick="window.location.href='index.html'">
+        ← Quay lại trang chủ
+    </button>
+</div>
 
-    <div class="section-bottom"></div>
+<!-- 🎵 NHẠC MP3 -->
+<audio id="music" loop>
+    <source src="v1c044g50000d6fgiffog65uos43ad2g.mp3" type="audio/mpeg">
+</audio>
 
-    <script>
-        function createSnow() {
-            const snow = document.createElement("div");
-            snow.classList.add("snowflake");
-
-            snow.innerHTML = "❄";
-            snow.style.left = Math.random() * window.innerWidth + "px";
-            snow.style.fontSize = Math.random() * 15 + 10 + "px";
-            snow.style.animationDuration = Math.random() * 5 + 3 + "s";
-            snow.style.opacity = Math.random();
-
-            document.body.appendChild(snow);
-
-            setTimeout(() => {
-                snow.remove();
-            }, 8000);
-        }
-
-        setInterval(createSnow, 80);
-    </script>
+<button onclick="document.getElementById('music').play()"
+style="position:fixed;bottom:20px;right:20px;">
+🎵 Bật nhạc
+</button>
 
 </body>
 </html>
