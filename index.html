@@ -9,6 +9,7 @@
             margin: 0;
             font-family: Arial, sans-serif;
             background-color: #f4f6f9;
+            scroll-behavior: smooth;
         }
 
         header {
@@ -53,12 +54,11 @@
         .btn-check {
             background-color: #28a745;
             color: white;
-            padding: 12px 25px;
+            padding: 14px 30px;
             border: none;
-            border-radius: 6px;
-            font-size: 16px;
+            border-radius: 8px;
+            font-size: 18px;
             cursor: pointer;
-            margin-top: 20px;
         }
 
         .btn-check:hover {
@@ -83,7 +83,6 @@
 <nav>
     <a href="#">Trang chủ</a>
     <a href="#">Giới thiệu</a>
-    <a href="#">Quy định đóng góp</a>
     <a href="#">Công khai tài chính</a>
     <a href="#">Liên hệ</a>
 </nav>
@@ -94,14 +93,25 @@
         <h2>Giới thiệu</h2>
         <p>
             Quỹ Bảo Hiểm GDV HAIDANG được thành lập nhằm hỗ trợ các thành viên
-            giao dịch nhanh hơn và uy tín minh bạch .
-
-        <button class="btn-check" onclick="alert('Quỹ đang hoạt động minh bạch và uy tín!')">
-            ✔ Check uy tín
-        </button>
-
+            giao dịch nhanh hơn và uy tín minh bạch.
+        </p>
     </div>
 
+    <!-- NÚT Ở KHOẢNG TRỐNG -->
+    <div style="text-align:center; margin-top:40px;">
+        <a href="#uytin">
+            <button class="btn-check">✔ Check uy tín</button>
+        </a>
+    </div>
+
+</div>
+
+<!-- MỤC MỚI (ĐANG TRỐNG) -->
+<div id="uytin" class="container">
+    <div class="card">
+        <h2>Thông tin uy tín</h2>
+        <p>Đang cập nhật...</p>
+    </div>
 </div>
 
 <footer>
