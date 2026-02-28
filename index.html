@@ -9,26 +9,25 @@
 body{
     margin:0;
     height:100vh;
-    background: linear-gradient(to top,#fbc2eb,#a6c1ee);
-    display:flex;
-    justify-content:center;
-    align-items:center;
     overflow:hidden;
-    font-family:Arial;
+    background:linear-gradient(to top,#fbc2eb,#a6c1ee);
 }
 
-/* Nút tim ban đầu */
+/* Tim bắt đầu */
 #startHeart{
-    font-size:40px;
+    position:absolute;
+    top:45%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    font-size:45px;
     cursor:pointer;
     animation:pulse 1.5s infinite;
-    position:absolute;
 }
 
 @keyframes pulse{
-    0%{transform:scale(1)}
-    50%{transform:scale(1.2)}
-    100%{transform:scale(1)}
+    0%{transform:translate(-50%,-50%) scale(1)}
+    50%{transform:translate(-50%,-50%) scale(1.2)}
+    100%{transform:translate(-50%,-50%) scale(1)}
 }
 
 /* Rơi xuống */
@@ -37,84 +36,99 @@ body{
 }
 
 @keyframes drop{
-    to{ transform: translateY(250px); }
+    to{ top:75%; }
 }
 
-/* Thân cây */
-#trunk{
+/* Canvas */
+canvas{
     position:absolute;
-    bottom:0;
-    width:30px;
-    height:0;
-    background:#6b2e1a;
-    border-radius:15px;
-    transition:height 2s ease;
+    top:0;
+    left:0;
 }
-
-/* Lá tim */
-.leaf{
-    position:absolute;
-    font-size:22px;
-    opacity:0;
-    animation:show 1s forwards;
-}
-
-@keyframes show{
-    to{opacity:1;}
-}
-
 </style>
 </head>
 
 <body>
 
 <div id="startHeart">💗</div>
-<div id="trunk"></div>
+<canvas id="canvas"></canvas>
 
 <script>
-const heart = document.getElementById("startHeart");
-const trunk = document.getElementById("trunk");
+const heartBtn = document.getElementById("startHeart");
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
 
-heart.addEventListener("click", () => {
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-    heart.classList.add("fall");
+heartBtn.addEventListener("click", ()=>{
 
-    setTimeout(() => {
-        heart.style.display="none";
+    heartBtn.classList.add("fall");
 
-        // Mọc thân cây
-        trunk.style.height="220px";
-
-        // Tạo tán lá hình trái tim
-        setTimeout(()=>{
-            const centerX = window.innerWidth/2;
-            const centerY = window.innerHeight/2 - 100;
-
-            for(let t=0; t<Math.PI*2; t+=0.2){
-
-                // Công thức vẽ hình trái tim
-                let x = 16 * Math.pow(Math.sin(t),3);
-                let y = 13*Math.cos(t) - 
-                        5*Math.cos(2*t) - 
-                        2*Math.cos(3*t) - 
-                        Math.cos(4*t);
-
-                const leaf = document.createElement("div");
-                leaf.className="leaf";
-                leaf.innerHTML="💖";
-
-                leaf.style.left = centerX + x*8 + "px";
-                leaf.style.top  = centerY - y*8 + "px";
-                leaf.style.animationDelay = t + "s";
-
-                document.body.appendChild(leaf);
-            }
-
-        },2000);
-
+    setTimeout(()=>{
+        heartBtn.style.display="none";
+        growTree();
     },1500);
 
 });
+
+function growTree(){
+
+    let trunkHeight = 0;
+    let maxHeight = 250;
+    let centerX = canvas.width/2;
+    let baseY = canvas.height*0.8;
+
+    let grow = setInterval(()=>{
+
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+
+        // Vẽ thân
+        ctx.fillStyle="#4b1e0d";
+        ctx.fillRect(centerX-15, baseY-trunkHeight, 30, trunkHeight);
+
+        // Vẽ cành
+        ctx.strokeStyle="#4b1e0d";
+        ctx.lineWidth=6;
+        ctx.beginPath();
+        ctx.moveTo(centerX, baseY-trunkHeight+80);
+        ctx.lineTo(centerX-80, baseY-trunkHeight+30);
+        ctx.moveTo(centerX, baseY-trunkHeight+80);
+        ctx.lineTo(centerX+80, baseY-trunkHeight+30);
+        ctx.stroke();
+
+        trunkHeight+=3;
+
+        if(trunkHeight>=maxHeight){
+            clearInterval(grow);
+            drawLeaves(centerX, baseY-maxHeight);
+        }
+
+    },20);
+}
+
+function drawLeaves(cx, topY){
+
+    for(let t=0;t<Math.PI*2;t+=0.05){
+
+        let x = 16*Math.pow(Math.sin(t),3);
+        let y = 13*Math.cos(t)
+              - 5*Math.cos(2*t)
+              - 2*Math.cos(3*t)
+              - Math.cos(4*t);
+
+        for(let i=0;i<3;i++){ // làm dày lá
+
+            let leaf = document.createElement("div");
+            leaf.innerHTML="💖";
+            leaf.style.position="absolute";
+            leaf.style.fontSize=(18+Math.random()*12)+"px";
+            leaf.style.left = cx + x*10 + (Math.random()*20-10) + "px";
+            leaf.style.top  = topY - y*10 + (Math.random()*20-10) + "px";
+            document.body.appendChild(leaf);
+        }
+    }
+}
 </script>
 
 </body>
