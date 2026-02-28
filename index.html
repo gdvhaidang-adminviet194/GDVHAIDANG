@@ -99,6 +99,54 @@ body {
     font-size: 18px;
     cursor: pointer;
 }
+
+/* Popup */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.popup {
+    width: 90%;
+    max-width: 600px;
+    background: #2b2b2b;
+    border-radius: 20px;
+    padding: 25px;
+    text-align: center;
+}
+
+.popup h2 {
+    margin-top: 0;
+    color: #3aa0ff;
+}
+
+.stars {
+    font-size: 28px;
+    margin: 15px 0;
+}
+
+.popup p {
+    line-height: 1.6;
+}
+
+.btn {
+    margin-top: 20px;
+    padding: 12px 30px;
+    background: #e74c3c;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+}
 </style>
 </head>
 
@@ -122,8 +170,30 @@ body {
     <div class="data-text">DATA CENTER</div>
     <h3>GDVHAIDANG</h3>
 
-    <!-- Nút thêm đúng vị trí bạn <button class="check-btn" onclick="window.location.href='check.html'">Check Uy Tín</button>
+    <button class="check-btn" onclick="document.getElementById('popup').style.display='flex'">
+        Check Uy Tín
+    </button>
+</div>
 
+<!-- Popup -->
+<div class="popup-overlay" id="popup">
+    <div class="popup">
+        <h2>NỘI QUY GIAO DỊCH ★ ĐIỀU KHOẢN ADMIN</h2>
+
+        <div class="stars">★★★★★</div>
+
+        <p>
+            Không gdtg qua Zalo<br>
+            Không BH cho các dv “Vi Phạm Pháp Luật”.<br>
+            Không xử lý các vấn đề của web Gạch thẻ, Like sub<br>
+            CS chỉ giải quyết khi bạn là người giao dịch trực tiếp<br>
+            với Thông Tin & STK có trong link bảo hiểm.
+        </p>
+
+        <button class="btn" onclick="document.getElementById('popup').style.display='none'">
+            Đã hiểu
+        </button>
+    </div>
 </div>
 
 </body>
