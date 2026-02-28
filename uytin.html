@@ -12,10 +12,13 @@
             background: linear-gradient(135deg, #081c3a, #0d2b57);
             color: #cbd5e1;
             text-align: center;
+            overflow-x: hidden;
         }
 
         .section-top {
             padding: 100px 20px;
+            position: relative;
+            z-index: 2;
         }
 
         h1 {
@@ -44,7 +47,24 @@
         }
 
         .section-bottom {
-            height: 5000px; /* siêu dài */
+            height: 5000px;
+        }
+
+        /* Tuyết đẹp */
+        .snowflake {
+            position: fixed;
+            top: -20px;
+            width: 20px;
+            height: 20px;
+            pointer-events: none;
+            z-index: 1;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh);
+            }
         }
     </style>
 </head>
@@ -63,6 +83,27 @@
     </div>
 
     <div class="section-bottom"></div>
+
+    <script>
+        function createSnow() {
+            const snow = document.createElement("div");
+            snow.classList.add("snowflake");
+
+            snow.innerHTML = "❄";
+            snow.style.left = Math.random() * window.innerWidth + "px";
+            snow.style.fontSize = Math.random() * 15 + 10 + "px";
+            snow.style.animationDuration = Math.random() * 5 + 3 + "s";
+            snow.style.opacity = Math.random();
+
+            document.body.appendChild(snow);
+
+            setTimeout(() => {
+                snow.remove();
+            }, 8000);
+        }
+
+        setInterval(createSnow, 80);
+    </script>
 
 </body>
 </html>
