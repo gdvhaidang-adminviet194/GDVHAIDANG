@@ -3,51 +3,73 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Check Uy Tín</title>
+<title>Thông báo</title>
 
 <style>
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #0c1b2e;
+    background: linear-gradient(to right, #0c1b2e, #081524);
     color: white;
+}
+
+/* Phần Quỹ Bảo Hiểm */
+.top-section {
+    text-align: center;
+    padding: 80px 20px 40px 20px;
+}
+
+.top-section h1 {
+    color: #2ee0d1;
+    font-size: 40px;
+    margin-bottom: 30px;
+}
+
+.top-section p {
+    font-size: 22px;
+    color: #a8b9cc;
+    line-height: 1.8;
+}
+
+/* Popup */
+.popup-container {
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
+    padding: 20px;
 }
 
 .popup {
     width: 90%;
     max-width: 600px;
     background: #2b2b2b;
-    border-radius: 20px;
-    padding: 25px;
+    border-radius: 25px;
+    padding: 30px;
     text-align: center;
 }
 
 .popup h2 {
-    margin-top: 0;
     color: #3aa0ff;
+    margin-top: 0;
 }
 
 .stars {
-    font-size: 28px;
-    margin: 15px 0;
+    font-size: 30px;
+    margin: 20px 0;
 }
 
 .popup p {
-    line-height: 1.6;
+    line-height: 1.8;
+    font-size: 18px;
 }
 
 .btn {
-    margin-top: 20px;
-    padding: 12px 30px;
+    margin-top: 25px;
+    padding: 15px 40px;
     background: #e74c3c;
     border: none;
-    border-radius: 10px;
+    border-radius: 15px;
     color: white;
-    font-size: 18px;
+    font-size: 20px;
     cursor: pointer;
 }
 </style>
@@ -55,22 +77,34 @@ body {
 
 <body>
 
-<div class="popup" id="popupBox">
-    <h2>NỘI QUY GIAO DỊCH ★ ĐIỀU KHOẢN ADMIN</h2>
-
-    <div class="stars">★★★★★</div>
-
+<!-- PHẦN BẠN KHOANH -->
+<div class="top-section">
+    <h1>Quỹ Bảo Hiểm</h1>
     <p>
-        Không gdtg qua Zalo<br>
-        Không BH cho các dv “Vi Phạm Pháp Luật”.<br>
-        Không xử lý các vấn đề của web Gạch thẻ, Like sub<br>
-        CS chỉ giải quyết khi bạn là người giao dịch trực tiếp<br>
-        với Thông Tin & STK có trong link bảo hiểm.
+        Không BH cho các DV “Vi Phạm Pháp Luật”.<br><br>
+        Lưu ý “Nội Dung Chuyển Khoản” để tránh bị rửa tiền
     </p>
+</div>
 
-    <button class="btn" onclick="document.getElementById('popupBox').style.display='none'">
-        Đã hiểu
-    </button>
+<!-- Thông báo -->
+<div class="popup-container">
+    <div class="popup">
+        <h2>NỘI QUY GIAO DỊCH ★ ĐIỀU KHOẢN ADMIN</h2>
+
+        <div class="stars">★★★★★</div>
+
+        <p>
+            Không gdtg qua Zalo<br><br>
+            Không BH cho các dv “Vi Phạm Pháp Luật”.<br><br>
+            Không xử lý các vấn đề của web Gạch thẻ, Like sub<br><br>
+            CS chỉ giải quyết khi bạn là người giao dịch trực tiếp
+            với Thông Tin & STK có trong link bảo hiểm.
+        </p>
+
+        <button class="btn" onclick="window.location.href='index.html'">
+            Đã hiểu
+        </button>
+    </div>
 </div>
 
 </body>
