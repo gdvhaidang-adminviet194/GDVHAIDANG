@@ -14,9 +14,9 @@ body{
     text-align:center;
 }
 
-/* Làm trang dài vô hạn */
+/* Trang dài vô hạn */
 .long-page{
-    height:5000px;
+    min-height:10000px;
     padding-top:100px;
 }
 
@@ -55,10 +55,22 @@ button{
     </button>
 </div>
 
-<!-- Nhạc tự chạy + lặp vô hạn -->
-<audio autoplay loop>
+<!-- Nhạc -->
+<audio id="music" loop>
     <source src="v1c044g50000d6fgiffog65uos43ad2g.mp3" type="audio/mpeg">
 </audio>
+
+<script>
+var audio = document.getElementById("music");
+
+/* Phát khi chạm màn hình 1 lần */
+document.addEventListener("click", function() {
+    audio.play();
+}, { once: true });
+
+/* Đảm bảo âm lượng vừa phải */
+audio.volume = 0.8;
+</script>
 
 </body>
 </html>
