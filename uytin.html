@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quỹ Bảo Hiểm</title>
+<title>Website</title>
 
 <style>
 body{
@@ -14,10 +14,16 @@ body{
     text-align:center;
 }
 
-/* Trang dài vô hạn */
-.long-page{
-    min-height:10000px;
-    padding-top:100px;
+.page{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+.hidden{
+    display:none;
 }
 
 h1{
@@ -44,15 +50,19 @@ button{
 
 <body>
 
-<div class="long-page">
-    <h1>Quỹ Bảo Hiểm</h1>
+<!-- Trang 1 -->
+<div id="page1" class="page">
+    <h1>Trang Chủ</h1>
+    <button onclick="goToPage2()">Check uy tín</button>
+</div>
 
+<!-- Trang 2 -->
+<div id="page2" class="page hidden">
+    <h1>Quỹ Bảo Hiểm</h1>
     <p>Không BH cho các DV “Vi Phạm Pháp Luật”.</p>
     <p>Lưu ý “Nội Dung Chuyển Khoản” để tránh bị rửa tiền</p>
 
-    <button onclick="window.location.href='index.html'">
-        ← Quay lại trang chủ
-    </button>
+    <button onclick="goBack()">← Quay lại trang chủ</button>
 </div>
 
 <!-- Nhạc -->
@@ -63,13 +73,16 @@ button{
 <script>
 var audio = document.getElementById("music");
 
-/* Phát khi chạm màn hình 1 lần */
-document.addEventListener("click", function() {
-    audio.play();
-}, { once: true });
+function goToPage2(){
+    audio.play(); // phát nhạc khi bấm
+    document.getElementById("page1").classList.add("hidden");
+    document.getElementById("page2").classList.remove("hidden");
+}
 
-/* Đảm bảo âm lượng vừa phải */
-audio.volume = 0.8;
+function goBack(){
+    document.getElementById("page2").classList.add("hidden");
+    document.getElementById("page1").classList.remove("hidden");
+}
 </script>
 
 </body>
