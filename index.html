@@ -110,9 +110,10 @@ function growTree(){
 
 function growFlowers(cx, topY){
 
-    let step = 0.12;
-    let scale = 8; // 🔥 nhỏ hơn một chút (trước là 9 hoặc 10)
-    
+    let points = [];
+    let step = 0.08;
+    let scale = 8;
+
     for(let t = 0; t < Math.PI*2; t += step){
 
         let x = 16*Math.pow(Math.sin(t),3);
@@ -121,19 +122,43 @@ function growFlowers(cx, topY){
               - 2*Math.cos(3*t)
               - Math.cos(4*t);
 
-        for(let i = 0; i < 4; i++){
-
-            let flower = document.createElement("div");
-            flower.innerHTML="💖";
-            flower.style.position="absolute";
-            flower.style.fontSize="22px";
-
-            flower.style.left = cx + x*scale + (Math.random()*8-4) + "px";
-            flower.style.top  = topY - y*scale + (Math.random()*8-4) + "px";
-
-            document.body.appendChild(flower);
+        for(let i=0;i<3;i++){
+            points.push({
+                x: cx + x*scale + (Math.random()*6-3),
+                y: topY - y*scale + (Math.random()*6-3)
+            });
         }
     }
+
+    let index = 0;
+
+    let bloom = setInterval(()=>{
+
+        if(index >= points.length){
+            clearInterval(bloom);
+            return;
+        }
+
+        let flower = document.createElement("div");
+        flower.innerHTML="💖";
+        flower.style.position="absolute";
+        flower.style.fontSize="22px";
+        flower.style.left = points[index].x + "px";
+        flower.style.top  = points[index].y + "px";
+        flower.style.opacity="0";
+        flower.style.transform="scale(0)";
+        flower.style.transition="0.4s ease";
+
+        document.body.appendChild(flower);
+
+        setTimeout(()=>{
+            flower.style.opacity="1";
+            flower.style.transform="scale(1)";
+        },50);
+
+        index++;
+
+    },30); // tốc độ nở từ từ
 }
 </script>
 
