@@ -53,11 +53,6 @@ body{
     text-align:center;
 }
 
-.card h2{
-    margin-bottom:20px;
-}
-
-/* BUTTON */
 button{
     background:#28a745;
     color:white;
@@ -68,7 +63,6 @@ button{
     cursor:pointer;
 }
 
-/* FOOTER */
 .footer{
     background:#0b3c6d;
     color:white;
@@ -96,27 +90,13 @@ button{
 <div class="card">
     <h2>Giới thiệu</h2>
     <p>Quỹ Bảo Hiểm GDV HAIDANG được thành lập nhằm hỗ trợ các thành viên giao dịch nhanh hơn và uy tín minh bạch.</p>
-
     <br>
-    <button onclick="goToPage2()">✔ Check uy tín</button>
+    <button onclick="window.location.href='uytin.html'">✔ Check uy tín</button>
 </div>
 
 <div class="footer">
     © 2026 QUỸ BẢO HIỂM GDV HAIDANG | All Rights Reserved
 </div>
-
-<!-- Nhạc -->
-<audio id="music" loop>
-    <source src="v1c044g50000d6fgiffog65uos43ad2g.mp3" type="audio/mpeg">
-</audio>
-
-<script>
-function goToPage2(){
-    var audio = document.getElementById("music");
-    audio.play(); // phát nhạc khi bấm
-    window.location.href = "uytin.html";
-}
-</script>
 
 </body>
 </html>
