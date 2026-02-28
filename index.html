@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cây Tình Yêu 💖</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(to top, #fbc2eb, #a6c1ee);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+/* Trái tim ban đầu */
+#startHeart {
+    font-size: 40px;
+    cursor: pointer;
+    animation: pulse 1.5s infinite;
+    transition: 1s;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* Hiệu ứng rơi */
+.fall {
+    position: absolute;
+    top: 50%;
+    animation: drop 1.5s forwards;
+}
+
+@keyframes drop {
+    to {
+        top: 80%;
+    }
+}
+
+/* Thân cây */
+#tree {
+    position: absolute;
+    bottom: 0;
+    width: 20px;
+    height: 0;
+    background: brown;
+    transition: height 2s ease;
+}
+
+/* Lá tim */
+.leaf {
+    position: absolute;
+    font-size: 20px;
+    animation: grow 1s ease forwards;
+    opacity: 0;
+}
+
+@keyframes grow {
+    to {
+        opacity: 1;
+        transform: scale(1.3);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div id="startHeart">💗</div>
+<div id="tree"></div>
+
+<script>
+const heart = document.getElementById("startHeart");
+const tree = document.getElementById("tree");
+
+heart.addEventListener("click", () => {
+
+    heart.classList.add("fall");
+
+    setTimeout(() => {
+        heart.style.display = "none";
+
+        // Mọc thân cây
+        tree.style.height = "200px";
+
+        // Tạo lá hình trái tim
+        for (let i = 0; i < 12; i++) {
+            const leaf = document.createElement("div");
+            leaf.classList.add("leaf");
+            leaf.innerHTML = "💖";
+            leaf.style.bottom = 150 + Math.random() * 100 + "px";
+            leaf.style.left = window.innerWidth / 2 - 60 + Math.random() * 120 + "px";
+            leaf.style.animationDelay = i * 0.2 + "s";
+            document.body.appendChild(leaf);
+        }
+
+    }, 1500);
+});
+</script>
+
+</body>
+</html>
