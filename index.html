@@ -63,10 +63,13 @@ const text = document.querySelector(".text");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-btn.onclick = function(){
+function startAnimation(){
     btn.style.display="none";
     drawHeart();
 }
+
+btn.addEventListener("click", startAnimation);
+btn.addEventListener("touchstart", startAnimation);
 
 function drawHeart(){
 
