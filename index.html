@@ -13,14 +13,16 @@ body{
     background:linear-gradient(to top,#fbc2eb,#a6c1ee);
 }
 
-/* Tim bắt đầu */
+/* Nút tim */
 #startHeart{
     position:absolute;
     top:45%;
     left:50%;
     transform:translate(-50%,-50%);
-    font-size:45px;
+    font-size:60px;
     cursor:pointer;
+    z-index:10; /* đảm bảo không bị đè */
+    user-select:none;
     animation:pulse 1.5s infinite;
 }
 
@@ -30,7 +32,6 @@ body{
     100%{transform:translate(-50%,-50%) scale(1)}
 }
 
-/* Rơi xuống */
 .fall{
     animation:drop 1.5s forwards;
 }
@@ -39,11 +40,11 @@ body{
     to{ top:75%; }
 }
 
-/* Canvas */
 canvas{
     position:absolute;
     top:0;
     left:0;
+    z-index:1;
 }
 </style>
 </head>
@@ -61,7 +62,11 @@ const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-heartBtn.addEventListener("click", ()=>{
+/* Bắt cả click + chạm */
+heartBtn.addEventListener("click", startTree);
+heartBtn.addEventListener("touchstart", startTree);
+
+function startTree(){
 
     heartBtn.classList.add("fall");
 
@@ -69,8 +74,7 @@ heartBtn.addEventListener("click", ()=>{
         heartBtn.style.display="none";
         growTree();
     },1500);
-
-});
+}
 
 function growTree(){
 
@@ -83,11 +87,9 @@ function growTree(){
 
         ctx.clearRect(0,0,canvas.width,canvas.height);
 
-        // Vẽ thân
         ctx.fillStyle="#4b1e0d";
         ctx.fillRect(centerX-15, baseY-trunkHeight, 30, trunkHeight);
 
-        // Vẽ cành
         ctx.strokeStyle="#4b1e0d";
         ctx.lineWidth=6;
         ctx.beginPath();
@@ -117,7 +119,7 @@ function drawLeaves(cx, topY){
               - 2*Math.cos(3*t)
               - Math.cos(4*t);
 
-        for(let i=0;i<3;i++){ // làm dày lá
+        for(let i=0;i<3;i++){
 
             let leaf = document.createElement("div");
             leaf.innerHTML="💖";
