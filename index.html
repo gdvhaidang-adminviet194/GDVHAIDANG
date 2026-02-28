@@ -3,153 +3,103 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cây Trái Tim 💖</title>
+<title>For My Love 💖</title>
 
 <style>
 body{
     margin:0;
-    overflow:hidden;
     height:100vh;
-    background:#fdfdfd;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+    font-family:sans-serif;
+    overflow:hidden;
 }
 
-#heartBtn{
-    position:absolute;
-    top:45%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    font-size:70px;
+#startBtn{
+    padding:15px 40px;
+    font-size:22px;
+    border:none;
+    border-radius:50px;
+    background:#ff4d6d;
+    color:white;
     cursor:pointer;
-    z-index:10;
-    animation:pulse 1.5s infinite;
-    user-select:none;
+    box-shadow:0 5px 15px rgba(0,0,0,0.2);
+    transition:0.3s;
 }
 
-@keyframes pulse{
-    0%{transform:translate(-50%,-50%) scale(1)}
-    50%{transform:translate(-50%,-50%) scale(1.2)}
-    100%{transform:translate(-50%,-50%) scale(1)}
+#startBtn:hover{
+    transform:scale(1.1);
 }
 
-.fall{
-    animation:drop 1.8s forwards ease-in;
-}
-
-@keyframes drop{
-    to{ top:80%; }
-}
-
-canvas{
+#scene{
     position:absolute;
-    top:0;
-    left:0;
+    inset:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    background:rgba(0,0,0,0.4);
+    opacity:0;
+    pointer-events:none;
+    transition:1s;
+}
+
+.show{
+    opacity:1 !important;
+    pointer-events:auto !important;
+}
+
+.heartHands{
+    font-size:120px;
+    transform:scale(0);
+    transition:1.5s ease;
+}
+
+.grow{
+    transform:scale(1);
+}
+
+.text{
+    color:white;
+    font-size:28px;
+    margin-top:20px;
+    opacity:0;
+    transition:1.5s;
+}
+.text.showText{
+    opacity:1;
 }
 </style>
 </head>
 
 <body>
 
-<div id="heartBtn">💗</div>
-<canvas id="canvas"></canvas>
+<button id="startBtn">Khởi động 💖</button>
+
+<div id="scene">
+    <div class="heartHands">🫶</div>
+    <div class="text">Anh yêu em ❤️</div>
+</div>
 
 <script>
-const heartBtn = document.getElementById("heartBtn");
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
+const btn = document.getElementById("startBtn");
+const scene = document.getElementById("scene");
+const heart = document.querySelector(".heartHands");
+const text = document.querySelector(".text");
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+btn.onclick = function(){
+    btn.style.display="none";
+    scene.classList.add("show");
 
-heartBtn.addEventListener("click", startAnimation);
-heartBtn.addEventListener("touchstart", startAnimation);
-
-function startAnimation(){
-    heartBtn.classList.add("fall");
     setTimeout(()=>{
-        heartBtn.style.display="none";
-        growTree();
-    },1800);
-}
+        heart.classList.add("grow");
+    },300);
 
-function growTree(){
-
-    let trunkHeight = 0;
-    let maxHeight = 260;
-    let centerX = canvas.width/2;
-    let baseY = canvas.height*0.9;
-
-    let grow = setInterval(()=>{
-
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-
-        // Thân cây đen
-        ctx.fillStyle="#111";
-        ctx.fillRect(centerX-18, baseY-trunkHeight, 36, trunkHeight);
-
-        trunkHeight+=3;
-
-        if(trunkHeight>=maxHeight){
-            clearInterval(grow);
-            bloomHeart(centerX, baseY-maxHeight);
-        }
-
-    },20);
-}
-
-function bloomHeart(cx, topY){
-
-    let scale = 14;
-    let points = [];
-
-    // Quét toàn bộ lưới để đảm bảo kín 100%
-    for(let x=-18; x<=18; x+=0.5){
-        for(let y=-18; y<=18; y+=0.5){
-
-            let formula = Math.pow(x*x + y*y - 1,3) - x*x*y*y*y;
-
-            if(formula <= 0){
-                points.push({
-                    x: cx + x*scale,
-                    y: topY - y*scale
-                });
-            }
-        }
-    }
-
-    // Xáo trộn để nở tự nhiên
-    points.sort(()=>Math.random()-0.5);
-
-    let colors = ["💖","💗","💘","💝","💓","💞"];
-
-    let i = 0;
-
-    let bloom = setInterval(()=>{
-
-        if(i >= points.length){
-            clearInterval(bloom);
-            return;
-        }
-
-        let flower = document.createElement("div");
-        flower.innerHTML = colors[Math.floor(Math.random()*colors.length)];
-        flower.style.position="absolute";
-        flower.style.fontSize = (18 + Math.random()*8) + "px";
-        flower.style.left = points[i].x + (Math.random()*6-3) + "px";
-        flower.style.top  = points[i].y + (Math.random()*6-3) + "px";
-        flower.style.opacity="0";
-        flower.style.transform="scale(0)";
-        flower.style.transition="0.3s ease";
-
-        document.body.appendChild(flower);
-
-        setTimeout(()=>{
-            flower.style.opacity="1";
-            flower.style.transform="scale(1)";
-        },50);
-
-        i++;
-
-    },5); // tốc độ nở mượt và dày
+    setTimeout(()=>{
+        text.classList.add("showText");
+    },1500);
 }
 </script>
 
