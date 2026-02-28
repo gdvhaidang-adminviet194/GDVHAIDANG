@@ -3,25 +3,143 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GDV S1 Vu Dinh Hoang</title>
+<title>ADMINVIET.VN</title>
+
 <style>
 body{
     margin:0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(to bottom, #001f3f, #001020);
+    font-family:Arial, Helvetica, sans-serif;
+    background:linear-gradient(to bottom,#001a33,#002b55,#001a33);
     color:white;
-    text-align:center;
 }
-h1{
-    margin-top:100px;
-    color:#22c1dc;
-    font-size:36px;
+
+/* ===== TRANG 1 ===== */
+.section{
+    padding:30px;
+}
+
+.box{
+    border:3px solid #ffe600;
+    border-radius:25px;
+    padding:25px;
+    margin-bottom:40px;
+    background:rgba(0,0,0,0.3);
+}
+
+.box h2{
+    color:#ff2d75;
+}
+
+.box p{
+    color:#cfd8ff;
+    line-height:1.8;
+}
+
+.gdv-btn{
+    display:inline-block;
+    margin-top:30px;
+    padding:15px 30px;
+    background:#4f7df0;
+    border-radius:15px;
+    text-decoration:none;
+    color:white;
+    font-size:20px;
+}
+
+/* ===== TRANG 2 ===== */
+#page2{
+    display:none;
+    text-align:center;
+    padding:40px 20px;
+}
+
+.check-btn{
+    margin-top:30px;
+    padding:15px 40px;
+    background:#4f7df0;
+    border-radius:15px;
+    display:inline-block;
+    text-decoration:none;
+    color:white;
+    font-size:20px;
+}
+
+.center-box{
+    margin-top:40px;
+    padding:25px;
+    border-radius:25px;
+    background:rgba(0,0,0,0.2);
 }
 </style>
 </head>
+
 <body>
 
-<h1>GDV S1 Vu Dinh Hoang</h1>
+<!-- ===== TRANG 1 ===== -->
+<div id="page1" class="section">
+
+    <div class="box">
+        <h2>Quỹ Bảo Hiểm Trang Chủ - ADMINVIET.VN</h2>
+        <p>
+            Khách hàng sẽ được Trang Chủ - ADMINVIET.VN bảo hiểm an toàn giao dịch 
+            với số tiền trong quỹ bảo hiểm 3.000.000 VND của Cao Thùy Đang
+        </p>
+    </div>
+
+    <div class="box">
+        <h2>Dịch Vụ Cung Cấp:</h2>
+        <p>
+            Giao dịch trung gian<br>
+            Bảo hiểm admin<br>
+            Mua bán acc game free fire<br>
+            Mua bán acc game liên quân<br>
+            dịch vụ liên quân
+        </p>
+    </div>
+
+    <a href="#" class="gdv-btn" onclick="openPage2()">GDV S1 Vu Dinh Hoang</a>
+
+</div>
+
+
+<!-- ===== TRANG 2 ===== -->
+<div id="page2">
+
+    <h1 style="color:#7fd9ff;">GDV S1 Vu Dinh Hoang</h1>
+
+    <a href="#" class="check-btn">Check Facebook</a>
+
+    <div class="center-box">
+
+        <div class="box">
+            <h2>Quỹ Bảo Hiểm Trang Chủ - ADMINVIET.VN</h2>
+            <p>
+                Khách hàng sẽ được Trang Chủ - ADMINVIET.VN bảo hiểm an toàn giao dịch 
+                với số tiền trong quỹ bảo hiểm 3.000.000 VND của Cao Thùy Đang
+            </p>
+        </div>
+
+        <div class="box">
+            <h2>Dịch Vụ Cung Cấp:</h2>
+            <p>
+                Giao dịch trung gian<br>
+                Bảo hiểm admin<br>
+                Mua bán acc game free fire<br>
+                Mua bán acc game liên quân<br>
+                dịch vụ liên quân
+            </p>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+function openPage2(){
+    document.getElementById("page1").style.display="none";
+    document.getElementById("page2").style.display="block";
+}
+</script>
 
 </body>
 </html>
