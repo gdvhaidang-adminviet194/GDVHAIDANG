@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cây Tình Yêu 💖</title>
+<title>Cây Trái Tim 💖</title>
 
 <style>
 body{
     margin:0;
     overflow:hidden;
     height:100vh;
-    background:linear-gradient(to top,#fbc2eb,#a6c1ee);
+    background:#fdfdfd;
 }
 
 #heartBtn{
@@ -74,79 +74,71 @@ function startAnimation(){
 function growTree(){
 
     let trunkHeight = 0;
-    let maxHeight = 280;
+    let maxHeight = 260;
     let centerX = canvas.width/2;
-    let baseY = canvas.height*0.85;
+    let baseY = canvas.height*0.9;
 
     let grow = setInterval(()=>{
 
         ctx.clearRect(0,0,canvas.width,canvas.height);
 
-        ctx.fillStyle="#5b2c16";
-        ctx.fillRect(centerX-12, baseY-trunkHeight, 24, trunkHeight);
-
-        ctx.beginPath();
-        ctx.strokeStyle="#5b2c16";
-        ctx.lineWidth=5;
-        ctx.moveTo(centerX, baseY-trunkHeight+100);
-        ctx.quadraticCurveTo(centerX-80, baseY-trunkHeight+40, centerX-120, baseY-trunkHeight);
-        ctx.stroke();
-
-        ctx.beginPath();
-        ctx.moveTo(centerX, baseY-trunkHeight+120);
-        ctx.quadraticCurveTo(centerX+80, baseY-trunkHeight+60, centerX+120, baseY-trunkHeight);
-        ctx.stroke();
+        // Thân cây đen
+        ctx.fillStyle="#111";
+        ctx.fillRect(centerX-18, baseY-trunkHeight, 36, trunkHeight);
 
         trunkHeight+=3;
 
         if(trunkHeight>=maxHeight){
             clearInterval(grow);
-            growFlowers(centerX, baseY-maxHeight);
+            bloomHeart(centerX, baseY-maxHeight);
         }
 
     },20);
 }
 
-function growFlowers(cx, topY){
+function bloomHeart(cx, topY){
 
-    let scale = 8;
+    let scale = 14;
     let points = [];
 
-    // Tạo nhiều điểm random bên trong trái tim
-    for(let i=0;i<2000;i++){
+    // Quét toàn bộ lưới để đảm bảo kín 100%
+    for(let x=-18; x<=18; x+=0.5){
+        for(let y=-18; y<=18; y+=0.5){
 
-        let x = (Math.random()*2-1)*18;
-        let y = (Math.random()*2-1)*18;
+            let formula = Math.pow(x*x + y*y - 1,3) - x*x*y*y*y;
 
-        // Kiểm tra có nằm trong trái tim không
-        let formula = Math.pow(x*x + y*y - 1,3) - x*x*y*y*y;
-
-        if(formula <= 0){
-            points.push({
-                x: cx + x*scale,
-                y: topY - y*scale
-            });
+            if(formula <= 0){
+                points.push({
+                    x: cx + x*scale,
+                    y: topY - y*scale
+                });
+            }
         }
     }
 
-    let index = 0;
+    // Xáo trộn để nở tự nhiên
+    points.sort(()=>Math.random()-0.5);
+
+    let colors = ["💖","💗","💘","💝","💓","💞"];
+
+    let i = 0;
 
     let bloom = setInterval(()=>{
 
-        if(index >= points.length){
+        if(i >= points.length){
             clearInterval(bloom);
             return;
         }
 
         let flower = document.createElement("div");
-        flower.innerHTML="💖";
+        flower.innerHTML = colors[Math.floor(Math.random()*colors.length)];
         flower.style.position="absolute";
-        flower.style.fontSize="22px";
-        flower.style.left = points[index].x + "px";
-        flower.style.top  = points[index].y + "px";
+        flower.style.fontSize = (18 + Math.random()*8) + "px";
+        flower.style.left = points[i].x + (Math.random()*6-3) + "px";
+        flower.style.top  = points[i].y + (Math.random()*6-3) + "px";
         flower.style.opacity="0";
         flower.style.transform="scale(0)";
-        flower.style.transition="0.4s ease";
+        flower.style.transition="0.3s ease";
 
         document.body.appendChild(flower);
 
@@ -155,9 +147,9 @@ function growFlowers(cx, topY){
             flower.style.transform="scale(1)";
         },50);
 
-        index++;
+        i++;
 
-    },15); // tốc độ nở
+    },5); // tốc độ nở mượt và dày
 }
 </script>
 
