@@ -14,6 +14,11 @@ body {
     text-align: center;
 }
 
+/* Ẩn trang GDV mặc định */
+#page2{
+    display:none;
+}
+
 /* Popup */
 #popup {
     position: fixed;
@@ -63,12 +68,15 @@ body {
 
 <body>
 
+<!-- ===== TRANG 1 ===== -->
+<div id="page1">
+
 <h1 style="color:#22c1dc; font-size:38px; font-weight:bold; margin-top:40px;">
 Quỹ Bảo Hiểm
 </h1>
 
 <div style="margin-top:40px;">
-    <button style="
+    <button onclick="goPage2()" style="
         background-color:#28a745;
         color:white;
         border:none;
@@ -78,6 +86,17 @@ Quỹ Bảo Hiểm
         cursor:pointer;">
         GDV s1 Vu Dinh Hoang
     </button>
+</div>
+
+</div>
+
+<!-- ===== TRANG 2 ===== -->
+<div id="page2">
+
+<h1 style="margin-top:120px; color:#22c1dc;">
+GDV S1 Vu Dinh Hoang
+</h1>
+
 </div>
 
 <!-- Popup -->
@@ -103,6 +122,11 @@ function closePopup() {
 
 window.onload = function() {
     document.getElementById("popup").style.display = "flex";
+}
+
+function goPage2(){
+    document.getElementById("page1").style.display="none";
+    document.getElementById("page2").style.display="block";
 }
 </script>
 
