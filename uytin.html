@@ -12,47 +12,57 @@
             background: linear-gradient(135deg, #081c3a, #0d2b57);
             color: #cbd5e1;
             text-align: center;
-            padding: 80px 20px;
+        }
 
-            min-height: 150vh; /* thêm khoảng trống để lướt xuống */
+        .section-top {
+            padding: 100px 20px;
         }
 
         h1 {
             color: #22d3ee;
-            font-size: 40px;
-            margin-bottom: 40px;
+            font-size: 42px;
+            margin-bottom: 50px;
         }
 
         p {
             font-size: 26px;
-            line-height: 1.6;
+            line-height: 1.8;
             max-width: 900px;
             margin: auto;
         }
 
         .back-btn {
             display: inline-block;
-            margin-top: 60px;
-            padding: 12px 25px;
+            margin-top: 70px;
+            padding: 14px 30px;
             background-color: #22d3ee;
             color: #081c3a;
             text-decoration: none;
-            border-radius: 8px;
+            border-radius: 10px;
             font-weight: bold;
+            font-size: 18px;
+        }
+
+        .section-bottom {
+            height: 800px; /* khoảng trống thật để cuộn xuống */
         }
     </style>
 </head>
 
 <body>
 
-    <h1>Quỹ Bảo Hiểm</h1>
+    <div class="section-top">
+        <h1>Quỹ Bảo Hiểm</h1>
 
-    <p>
-        Không BH cho các DV “Vi Phạm Pháp Luật”.<br><br>
-        Lưu ý “Nội Dung Chuyển Khoản” để tránh bị rửa tiền
-    </p>
+        <p>
+            Không BH cho các DV “Vi Phạm Pháp Luật”.<br><br>
+            Lưu ý “Nội Dung Chuyển Khoản” để tránh bị rửa tiền
+        </p>
 
-    <a href="index.html" class="back-btn">← Quay lại trang chủ</a>
+        <a href="index.html" class="back-btn">← Quay lại trang chủ</a>
+    </div>
+
+    <div class="section-bottom"></div>
 
 </body>
 </html>
