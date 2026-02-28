@@ -8,22 +8,22 @@
 <style>
 body{
     margin:0;
-    height:100vh;
     overflow:hidden;
+    height:100vh;
     background:linear-gradient(to top,#fbc2eb,#a6c1ee);
 }
 
-/* Nút tim */
-#startHeart{
+/* Trái tim ban đầu */
+#heartBtn{
     position:absolute;
     top:45%;
     left:50%;
     transform:translate(-50%,-50%);
-    font-size:60px;
+    font-size:70px;
     cursor:pointer;
-    z-index:10; /* đảm bảo không bị đè */
-    user-select:none;
+    z-index:10;
     animation:pulse 1.5s infinite;
+    user-select:none;
 }
 
 @keyframes pulse{
@@ -33,85 +33,92 @@ body{
 }
 
 .fall{
-    animation:drop 1.5s forwards;
+    animation:drop 1.8s forwards ease-in;
 }
 
 @keyframes drop{
-    to{ top:75%; }
+    to{ top:80%; }
 }
 
 canvas{
     position:absolute;
     top:0;
     left:0;
-    z-index:1;
 }
 </style>
 </head>
 
 <body>
 
-<div id="startHeart">💗</div>
+<div id="heartBtn">💗</div>
 <canvas id="canvas"></canvas>
 
 <script>
-const heartBtn = document.getElementById("startHeart");
+const heartBtn = document.getElementById("heartBtn");
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-/* Bắt cả click + chạm */
-heartBtn.addEventListener("click", startTree);
-heartBtn.addEventListener("touchstart", startTree);
+heartBtn.addEventListener("click", startAnimation);
+heartBtn.addEventListener("touchstart", startAnimation);
 
-function startTree(){
-
+function startAnimation(){
     heartBtn.classList.add("fall");
 
     setTimeout(()=>{
         heartBtn.style.display="none";
         growTree();
-    },1500);
+    },1800);
 }
 
 function growTree(){
 
     let trunkHeight = 0;
-    let maxHeight = 250;
+    let maxHeight = 280;
     let centerX = canvas.width/2;
-    let baseY = canvas.height*0.8;
+    let baseY = canvas.height*0.85;
 
     let grow = setInterval(()=>{
 
         ctx.clearRect(0,0,canvas.width,canvas.height);
 
-        ctx.fillStyle="#4b1e0d";
-        ctx.fillRect(centerX-15, baseY-trunkHeight, 30, trunkHeight);
+        // Thân cây
+        ctx.fillStyle="#5b2c16";
+        ctx.fillRect(centerX-12, baseY-trunkHeight, 24, trunkHeight);
 
-        ctx.strokeStyle="#4b1e0d";
-        ctx.lineWidth=6;
+        // Cành trái
         ctx.beginPath();
-        ctx.moveTo(centerX, baseY-trunkHeight+80);
-        ctx.lineTo(centerX-80, baseY-trunkHeight+30);
-        ctx.moveTo(centerX, baseY-trunkHeight+80);
-        ctx.lineTo(centerX+80, baseY-trunkHeight+30);
+        ctx.strokeStyle="#5b2c16";
+        ctx.lineWidth=5;
+        ctx.moveTo(centerX, baseY-trunkHeight+100);
+        ctx.quadraticCurveTo(centerX-80, baseY-trunkHeight+40, centerX-120, baseY-trunkHeight);
+        ctx.stroke();
+
+        // Cành phải
+        ctx.beginPath();
+        ctx.moveTo(centerX, baseY-trunkHeight+120);
+        ctx.quadraticCurveTo(centerX+80, baseY-trunkHeight+60, centerX+120, baseY-trunkHeight);
         ctx.stroke();
 
         trunkHeight+=3;
 
         if(trunkHeight>=maxHeight){
             clearInterval(grow);
-            drawLeaves(centerX, baseY-maxHeight);
+            growFlowers(centerX, baseY-maxHeight);
         }
 
     },20);
 }
 
-function drawLeaves(cx, topY){
+function growFlowers(cx, topY){
 
-    for(let t=0;t<Math.PI*2;t+=0.05){
+    let count = 0;
+
+    let bloom = setInterval(()=>{
+
+        let t = Math.random()*Math.PI*2;
 
         let x = 16*Math.pow(Math.sin(t),3);
         let y = 13*Math.cos(t)
@@ -119,17 +126,27 @@ function drawLeaves(cx, topY){
               - 2*Math.cos(3*t)
               - Math.cos(4*t);
 
-        for(let i=0;i<3;i++){
+        let flower = document.createElement("div");
+        flower.innerHTML="💖";
+        flower.style.position="absolute";
+        flower.style.fontSize=(20+Math.random()*20)+"px";
+        flower.style.left = cx + x*10 + (Math.random()*30-15) + "px";
+        flower.style.top  = topY - y*10 + (Math.random()*30-15) + "px";
+        flower.style.opacity="0";
+        flower.style.transition="0.8s";
+        document.body.appendChild(flower);
 
-            let leaf = document.createElement("div");
-            leaf.innerHTML="💖";
-            leaf.style.position="absolute";
-            leaf.style.fontSize=(18+Math.random()*12)+"px";
-            leaf.style.left = cx + x*10 + (Math.random()*20-10) + "px";
-            leaf.style.top  = topY - y*10 + (Math.random()*20-10) + "px";
-            document.body.appendChild(leaf);
+        setTimeout(()=>{
+            flower.style.opacity="1";
+            flower.style.transform="scale(1.3)";
+        },50);
+
+        count++;
+        if(count>150){
+            clearInterval(bloom);
         }
-    }
+
+    },50);
 }
 </script>
 
